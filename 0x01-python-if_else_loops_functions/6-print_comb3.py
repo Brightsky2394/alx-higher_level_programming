@@ -1,9 +1,8 @@
 #!/usr/bin/python3
-for number in range(10):
-    for j in range(10):
-        if (i != j and i < j) and i < 9:
-            if (i == 8 and j == 9):
-                print('{0}{1}'.format(i, j))
-            else:
-                print('{0}{1}, '.format(i, j), end='')
+for num in range(0, 90):
+    if num % 10 > num / 10:
+        if num != 89:
+            print("{:02d}, ".format(num), end='')
+        else:
+            print("{:02d}".format(num))
 
