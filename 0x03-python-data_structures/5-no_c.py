@@ -3,5 +3,5 @@ def c_no(my_string):
     new_str = ""
     for x in mystring:
         if x != "c" and x != "C":
-            new_str += 1
+            new_str += x
     return new_str
