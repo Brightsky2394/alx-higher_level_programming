@@ -9,10 +9,13 @@ def add_integer(a, b=98):
     or float raise TypeError exception
     """
 
-    if isinstance(a, int or float):
+    if isinstance(a, (float, int)) is True:
         num1 = int(a)
-    if isinstance(b, int or float):
+    else:
+        raise TypeError("a must be an integer")
+    if isinstance(b, (float, int)) is True:
         num2 = int(b)
-    if isinstance(num1 and num2, int):
-        cnt = num1 + num2
-        return cnt
+    else:
+        raise TypeError("b must be an integer")
+    cnt = num1 + num2
+    return cnt
