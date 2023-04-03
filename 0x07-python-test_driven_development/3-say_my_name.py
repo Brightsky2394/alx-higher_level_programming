@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 def say_my_name(first_name, last_name=''):
     if isinstance(first_name, str) is False:
         raise TypeError("first_name must be a string")
