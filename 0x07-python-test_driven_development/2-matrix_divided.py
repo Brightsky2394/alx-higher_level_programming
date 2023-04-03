@@ -2,33 +2,35 @@
 
 def matrix_divided(matrix, div):
     """
-    matrix must be list of lists of integers/floats.
-    If it is not a list raise TypeError exception.
-    When div is 0 raise a ZeroDivisionError.
-    If the row of each sub-list is not same size
-    raise a TypeError exception and finally returned
-    the new_matrix
+    each element of the matrix is divided by div and
+    return a new matrix, with the results in 2
+    precisionnumbers. If div not is a number raise
+    TypeError or ZeroDivisionError if div is 0.
+    If matrix not is a list of lists return TypeError.
+    If some sub-list aren't a list return TypeError.
+    If some element of some sub-list aren't integer
+    or float number return TypeError
     """
-    if isinstance(div, (float, int)) is False:
+    if type(div) not in (int, float):
         raise TypeError("div must be a number")
-    elif div is 0:
+    elif div == 0:
         raise ZeroDivisionError("division by zero")
-    if isinstance(matrix, list) is False or len(matrix) is 0:
-        raise TypeError("matrix must be matrix (list of lists)\
+    if type(matrix) is not list or len(matrix) == 0:
+        raise TypeError("matrix must be a  matrix (list of lists)\
                 of integers/floats")
     else:
         for term in matrix:
-            if isinstance(term, list) is False:
+            if type(term) is not list:
                 raise TypeError("matrix must be matrix (list of lists)\
                         of integers/floats")
             else:
                 for el in term:
-                    if isinstance(el, (float, int)) is False:
+                    if type(el) not in (int, float):
                         raise TypeError("matrix must be matrix (list of lists)\
                                 of integers/floats")
         row_len = len(matrix[0])
         for i in range(len(matrix)):
-            if len(matrix[i]) != row_len:
+            if len(matrix[i]) is not row_len:
                 raise TypeError("Each row of the matrix must\
                         have the same size")
         new_matrix = [[round((elem / div), 2) for elem in j] for j in matrix]
