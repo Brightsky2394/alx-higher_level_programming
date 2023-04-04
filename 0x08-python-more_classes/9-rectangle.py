@@ -123,5 +123,10 @@ class Rectangle:
             return rect_1
 
     def square(cls, size=0):
+        """
+        returned new Rectangle instance
+        with width == height == size
+        """
+
         res = cls(size, size)
         return res
