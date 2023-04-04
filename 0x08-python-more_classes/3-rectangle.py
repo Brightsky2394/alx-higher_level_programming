@@ -81,7 +81,7 @@ class Rectangle:
         """
 
         strg = ''
-        if self._width == 0 or self._height == 0:
+        if self.width == 0 or self.height == 0:
             return strg
         for m in range(self.height):
             for n in range(self.width):
