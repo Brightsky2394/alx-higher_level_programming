@@ -83,9 +83,8 @@ class Rectangle:
         strg = ''
         if self._width == 0 or self._height == 0:
             return strg
-        else:
-            for m in range(self.height):
-                for n in range(self.width):
-                    strg += '#'
-                strg += '\n'
-            return strg[0:-1]
+        for m in range(self.height):
+            for n in range(self.width):
+                strg += '#'
+            strg += '\n'
+        return strg[0:-1]
