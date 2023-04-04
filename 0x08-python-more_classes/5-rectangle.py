@@ -96,3 +96,13 @@ class Rectangle:
         """
 
         return ("Rectangle({}, {})".format(self.width, self.height))
+
+    def __del__(self):
+        """
+        return the message 'Bye Rectangle'
+        whenever an instance of the class
+        is deleted
+        """
+
+        cnt = "Bye rectangle..."
+        print(cnt)
