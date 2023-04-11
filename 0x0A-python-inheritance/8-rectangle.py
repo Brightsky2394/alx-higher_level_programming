@@ -26,7 +26,7 @@ class BaseGeometry:
         supplied
         """
 
-        if isinstance(value, int) is False:
+        if not isinstance(value, int):
             message1 = "{} must be an integer"
             raise TypeError(message1.format(name))
         elif value <= 0:
