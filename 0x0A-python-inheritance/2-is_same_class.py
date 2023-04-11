@@ -8,11 +8,12 @@ instance of an object
 
 def is_same_class(obj, a_class):
     """
-    return True if an object is an
-    instance of a specified class
+    return True if an object is
+    exactly an instance of a
+    specified class
     """
 
-    check = isinstance(obj, a_class)
+    check = type(obj) is a_class
     if check:
         return True
     return False
