@@ -26,7 +26,7 @@ class BaseGeometry:
         supplied
         """
 
-        if not isinstance(value, int):
+        if isinstance(value, int) is False:
             message1 = "{} must be an integer"
             raise TypeError(message1.format(name))
         elif value <= 0:
@@ -45,7 +45,7 @@ class Rectangle(BaseGeometry):
         height parameter
         """
 
-        super().integer_validator("width", width)
-        super().integer_validator("height", height)
+        BaseGeometry.integer_validator(self, "width", width)
+        BaseGeometry.integer_validator(self, "height", height)
         self.__width = width
         self.__height = height
