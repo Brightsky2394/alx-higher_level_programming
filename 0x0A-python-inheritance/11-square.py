@@ -32,7 +32,7 @@ class Square(Rectangle):
         of area
         """
 
-        val = self.__size ** 2
+        val = self.__size * self.__size
         return val
 
     def __str__(self):
