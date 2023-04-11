@@ -6,6 +6,7 @@ public instance method
 raising an exception
 """
 
+BaseGeometry = __import__('7-base_geometry').BaseGeometry
 Rectangle = __import__('9-rectangle').Rectangle
 
 
