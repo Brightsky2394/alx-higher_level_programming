@@ -1,37 +1,12 @@
 #!/usr/bin/python3
-
 """
 BaseGeometry class with
-public instance method raising
-an Exception
+public instance method
+raising an exception
 """
 
 
-class BaseGeometry:
-    """
-    BaseGeometry class
-    """
-
-    def area(self):
-        """
-        raises an Exception
-        """
-
-        message = "area() is not implemented"
-        raise Exception(message)
-
-    def integer_validator(self, name, value):
-        """
-        validate the value
-        supplied
-        """
-
-        if isinstance(value, int) is False:
-            message1 = "{} must be an integer"
-            raise TypeError(message1.format(name))
-        elif value <= 0:
-            message2 = "{} must be greater than 0"
-            raise ValueError(message2.format(name))
+BaseGeometry = __import__("7-base_geometry").BaseGeometry
 
 
 class Rectangle(BaseGeometry):
@@ -45,7 +20,7 @@ class Rectangle(BaseGeometry):
         height parameter
         """
 
-        BaseGeometry.integer_validator(self, "width", width)
-        BaseGeometry.integer_validator(self, "height", height)
+        super().integer_validator("width", width)
+        super().integer_validator("height", height)
         self.__width = width
         self.__height = height
