@@ -6,7 +6,7 @@ public instance method
 raising an exception
 """
 
-BaseGeometry = __import__('7-base_geometry').BaseGeometry
+
 Rectangle = __import__('9-rectangle').Rectangle
 
 
@@ -24,3 +24,12 @@ class Square(Rectangle):
         Rectangle.integer_validator("size", size)
         super().__init__(size, size)
         self.__size = size
+
+    def area(self):
+        """
+        compute and return the
+        area of square
+        """
+
+        val = self.__size * self.__size
+        return val
