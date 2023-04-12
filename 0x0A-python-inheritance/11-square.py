@@ -22,8 +22,8 @@ class Square(Rectangle):
         """
 
         super().integer_validator("size", size)
-        super().__init__(size, size)
         self.__size = size
+        super().__init__(size, size)
 
     def area(self):
         """
@@ -40,5 +40,5 @@ class Square(Rectangle):
         more readable form
         """
 
-        cnt = '[{}] ' + '{}' + '/' + "{}"
-        return cnt.format(self.__class__.__name__, self.__size, self.__self)
+        cnt = '[Square] ' + '{}' + '/' + "{}"
+        return cnt.format(self.__size, self.__self)
