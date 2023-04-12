@@ -41,4 +41,4 @@ class Square(Rectangle):
         """
 
         cnt = '[Square] ' + '{}' + '/' + "{}"
-        return cnt.format(self.__size, self.__self)
+        return cnt.format(self.__size, self.__size)
