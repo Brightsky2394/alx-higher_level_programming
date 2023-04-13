@@ -13,7 +13,7 @@ def load_from_json_file(filename):
     from JSON file
     """
 
-    stream = open(filename, encoding='utf-8')
+    stream = open(filename, mode='r', encoding='utf-8')
     with stream as fd:
         x = load(fd.read())
         return x
