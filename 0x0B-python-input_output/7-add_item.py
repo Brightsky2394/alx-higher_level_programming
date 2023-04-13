@@ -17,5 +17,5 @@ if path.exists("add_item.json"):
     py_list = load_from_json_file("add_item.json")
 else:
     py_list = []
-py_list = [py_list.append(argv[j] for j in range(1, len(argv)))]
+py_list = [py_list.append(argv[j]) for j in range(len(argv))]
 save_to_json_file(py_list, "add_item.json")
