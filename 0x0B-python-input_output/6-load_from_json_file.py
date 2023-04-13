@@ -15,5 +15,5 @@ def load_from_json_file(filename):
 
     stream = open(filename, mode='r', encoding='utf-8')
     with stream as fd:
-        x = load(fd.read())
+        x = loads(fd.read())
         return x
