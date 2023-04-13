@@ -14,5 +14,5 @@ def to_json_string(my_obj):
     of an object
     """
 
-    res = dumps(my_obj) if True else False
+    res = dumps(my_obj) if True else None
     return res
