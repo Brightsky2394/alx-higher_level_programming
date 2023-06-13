@@ -1,8 +1,7 @@
 #!/usr/bin/node
-const lang_cnt = ["C is fun", "Python is cool", "Javascript is amazing"];
+const langCnt = ['C is fun', 'Python is cool', 'Javascript is amazing'];
 let j = 0;
-while (j < 3)
-{
-	console.log(lang_cnt[j]);
-	j++;
+while (j < 3) {
+  console.log(langCnt[j]);
+  j++;
 }
