@@ -1,13 +1,8 @@
 #!/usr/bin/node
+
 const fs = require('fs');
-fs.readFile(process.argv[2], (err, data) => {
-  if (err) throw err;
-  let output = data;
-  fs.readFile(process.argv[3], (err, data) => {
-    if (err) throw err;
-    output += data;
-    fs.writeFile(process.argv[4], output, (err) => {
-      if (err) throw err;
-    });
-  });
-});
+let content = '';
+const argv = process.argv;
+content = content.concat(fs.readFileSync(argv[2]));
+content = content.concat(fs.readFileSync(argv[3]));
+fs.writeFileSync(argv[4], content);
