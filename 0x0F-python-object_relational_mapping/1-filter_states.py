@@ -8,4 +8,4 @@ if __name__ == "__main__":
                            db=sys.argv[3])
     curr_obj = db.cursor()
     curr_obj.execute("SELECT * FROM states ORDER BY id")
-    [print(state) for state in curr_obj.fetchall() if state[1][0] == "N"]i
+    [print(state) for state in curr_obj.fetchall() if state[1][0] == "N"]
