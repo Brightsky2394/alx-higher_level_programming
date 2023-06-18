@@ -9,12 +9,12 @@ if __name__ == "__main__":
     password = argv[2]
     db_name = argv[3]
     state_name = argv[4]
-    conn = MySQLdb.connect(host="localhost",
-                           port=3306,
-                           user=username,
-                           passwd=password,
-                           db=db_name)
-    curr_obj = conn.cursor()
+    db = MySQLdb.connect(host="localhost",
+                         port=3306,
+                         user=username,
+                         passwd=password,
+                         db=db_name)
+    curr = db.cursor()
 
     query = """
     SELECT states.id, name FROM states WHERE name='{:s}'
@@ -22,10 +22,10 @@ if __name__ == "__main__":
     ORDER BY states.id ASC;
     """.format(state_name)
 
-    curr_obj.execute(query)
-    rows = curr_obj.fetchall()
+    curr.execute(query)
+    rows = curr.fetchall()
     for row in rows:
         print(row)
 
-    curr_obj.close()
-    conn.close()
+    curr.close()
+    db.close()
