@@ -1,9 +1,26 @@
 #!/usr/bin/python3
-from sys import argv
-import MySQLdb
+"""
+lists all states with a name starting with N
+"""
 
-if __name__ == "__main__":
-    connection = MySQLdb.connect(user=argv[1], passwd=argv[2], db=argv[3])
-    curr_obj = connection.cursor()
-    curr_obj.execute("SELECT * FROM states ORDER BY id")
-    [print(state) for state in curr_obj.fetchall() if state[1][0] == "N"]
+import MySQLdb
+from sys import argv
+
+if __name__ == '__main__':
+    """
+    Access to the database and get the states
+    from the database.
+    """
+    connection = MySQLdb.connect(host="localhost", user=argv[1], port=3306,
+                                 passwd=argv[2], db=argv[3])
+
+    curr_obj = db.cursor()
+    curr_obj.execute("SELECT * FROM states \
+                      WHERE name LIKE BINARY 'N%' \
+                      ORDER BY states.id ASC")
+    rows = curr_obj.fetchall()
+
+    for row in rows:
+        print(row)
+curr_obj.close()
+connection.close()
