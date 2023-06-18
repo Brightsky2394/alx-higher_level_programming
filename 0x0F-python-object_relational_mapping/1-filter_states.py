@@ -1,26 +1,26 @@
 #!/usr/bin/python3
-""" lists all states with a name starting with N  """
+""" Filter states """
 
-import sys
+from sys import argv
 import MySQLdb
 
-if __name__ = '__main__':
-    username = sys.argv[1]
-    password = sys.argv[2]
-    db_name = sys.argv[3]
-    connection = MySQLdb.connect(host='localhost',
-                                 user=username,
+if __name__ == "__main__":
+    username = argv[1]
+    password = argv[2]
+    db_name = argv[3]
+    connection = MySQLdb.connect(host="localhost",
                                  port=3306,
+                                 user=username,
                                  passwd=password,
                                  db=db_name)
-    curr_obj = connection.cursor()
-    curr_obj.execute("SELECT states.id, name FROM states WHERE name "
-                     "COLLATE latin1_general_cs "
-                     "LIKE 'N%' "
-                     "ORDER BY states.id ASC;")
-    rows = curr_obj.fetchall()
+    curr = db.cursor()
+    curr.execute("SELECT states.id, name FROM states WHERE name "
+                 "COLLATE latin1_general_cs "
+                 "LIKE 'N%' "
+                 "ORDER BY states.id ASC;")
+    rows = curr.fetchall()
     for row in rows:
         print(row)
 
-    curr_obj.close()
+    curr.close()
     connection.close()
