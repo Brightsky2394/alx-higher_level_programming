@@ -1,36 +1,41 @@
 #!/usr/bin/python3
-""" All cities by state """
+"""
+This script  takes in the name of a state
+as an argument and lists all cities of that
+state, using the database hbtn_0e_4_usa.
+"""
 
-from sys import argv
 import MySQLdb
+from sys import argv
 
-if __name__ == "__main__":
-    username = argv[1]
-    password = argv[2]
-    db_name = argv[3]
-    state_name = argv[4]
-
-    conn = MySQLdb.connect(host="localhost",
-                           port=3306,
-                           user=username,
-                           passwd=password,
-                           db=db_name)
-    curr_obj = conn.cursor()
-
-    query = """
-    SELECT cities.name
-    FROM cities
-    JOIN states ON cities.state_id = states.id
-    WHERE states.name = %s
-    ORDER BY cities.id ASC;
+if __name__ == '__main__':
+    """
+    Access to the database and get the cities
+    from the database.
     """
 
-    curr_obj.execute(query, (state_name,))
+    conn = MySQLdb.connect(host="localhost", user=argv[1], port=3306,
+                           passwd=argv[2], db=argv[3])
 
-    rows = curr_obj.fetchall()
-    rows = [i[0] for i in rows]
+    with conn.cursor() as curr:
+        curr.execute("""
+            SELECT
+                cities.id, cities.name
+            FROM
+                cities
+            JOIN
+                states
+            ON
+                cities.state_id = states.id
+            WHERE
+                states.name LIKE BINARY %(state_name)s
+            ORDER BY
+                cities.id ASC
+        """, {
+            'state_name': argv[4]
+        })
 
-    print(', '.join(rows))
+        rows = curr.fetchall()
 
-    curr_obj.close()
-    conn.close()
+    if rows is not None:
+        print(", ".join([row[1] for row in rows]))
