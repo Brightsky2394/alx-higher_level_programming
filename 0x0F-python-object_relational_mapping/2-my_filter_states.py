@@ -1,31 +1,28 @@
 #!/usr/bin/python3
-""" Filter states by user input """
+"""
+takes in an argument and displays
+all values in the states table
+"""
 
-from sys import argv
 import MySQLdb
+from sys import argv
 
-if __name__ == "__main__":
-    username = argv[1]
-    password = argv[2]
-    db_name = argv[3]
-    state_name = argv[4]
-    db = MySQLdb.connect(host="localhost",
-                         port=3306,
-                         user=username,
-                         passwd=password,
-                         db=db_name)
-    curr = db.cursor()
+if __name__ == '__main__':
+    """
+    Access to the database and get the states
+    from the database.
+    """
 
-    query = """
-    SELECT states.id, name FROM states WHERE name='{:s}'
-    COLLATE latin1_general_cs
-    ORDER BY states.id ASC;
-    """.format(state_name)
+    conn = MySQLdb.connect(host="localhost", user=argv[1], port=3306,
+                           passwd=argv[2], db=argv[3])
 
-    curr.execute(query)
+    curr = conn.cursor()
+    curr.execute("SELECT * FROM states \
+                 WHERE name LIKE BINARY '{}' \
+                 ORDER BY states.id ASC".format(argv[4]))
     rows = curr.fetchall()
+
     for row in rows:
         print(row)
-
+    conn.close()
     curr.close()
-    db.close()
