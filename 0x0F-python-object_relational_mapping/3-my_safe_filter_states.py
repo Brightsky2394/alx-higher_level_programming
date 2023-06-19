@@ -1,32 +1,38 @@
 #!/usr/bin/python3
-""" Prevent SQL Injection """
+"""
+This script takes in an argument and
+displays all values in the states
+where `name` matches the argument
+from the database `hbtn_0e_0_usa`.
 
-from sys import argv
+This time the script is safe from
+MySQL injections!
+"""
+
 import MySQLdb
+from sys import argv
 
-if __name__ == "__main__":
-    username = argv[1]
-    password = argv[2]
-    db_name = argv[3]
-    state_name = argv[4]
-    conn = MySQLdb.connect(host="localhost",
-                           port=3306,
-                           user=username,
-                           passwd=password,
-                           db=db_name)
-    curr = conn.cursor()
-
-    query = """
-    SELECT states.id, name FROM states WHERE name = %s
-    COLLATE latin1_general_cs
-    ORDER BY states.id ASC;
+if __name__ == '__main__':
+    """
+    Access to the database and get the states
+    from the database.
     """
 
-    curr.execute(query, (state_name, ))
+    conn = MySQLdb.connect(host="localhost", user=argv[1], port=3306,
+                           passwd=argv[2], db=argv[3])
 
-    rows = curr.fetchall()
-    for row in rows:
-        print(row)
+    with conn.cursor() as curr:
+        curr.execute("""
+                      SELECT *
+                      FROM states
+                      WHERE name LIKE BINARY %(name)s
+                      ORDER BY states.id ASC
+                    """, {
+            'name': argv[4]
+        })
 
-    curr.close()
-    conn.close()
+        rows = cur.fetchall()
+
+    if rows is not None:
+        for row in rows:
+            print(row)
