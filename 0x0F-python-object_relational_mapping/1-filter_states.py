@@ -1,26 +1,24 @@
 #!/usr/bin/python3
-""" Filter states """
+"""
+lists all states with a name starting with N
+"""
 
-from sys import argv
 import MySQLdb
+from sys import argv
 
-if __name__ == "__main__":
-    username = argv[1]
-    password = argv[2]
-    db_name = argv[3]
-    conn = MySQLdb.connect(host="localhost",
-                           port=3306,
-                           user=username,
-                           passwd=password,
-                           db=db_name)
-    curr_obj = conn.cursor()
-    curr_obj.execute("SELECT states.id, name FROM states WHERE name "
-                     "COLLATE latin1_general_cs "
-                     "LIKE 'N%' "
-                     "ORDER BY states.id ASC;")
-    rows = curr_obj.fetchall()
+if __name__ == '__main__':
+    """
+    Access to the database and get the states
+    from the database.
+    """
+    db = MySQLdb.connect(host="localhost", user=argv[1], port=3306,
+                         passwd=argv[2], db=argv[3])
+
+    curr = db.cursor()
+    curr.execute("SELECT * FROM states \
+                  WHERE name LIKE BINARY 'N%' \
+                  ORDER BY states.id ASC")
+    rows = curr.fetchall()
+
     for row in rows:
         print(row)
-
-    curr_obj.close()
-    conn.close()
