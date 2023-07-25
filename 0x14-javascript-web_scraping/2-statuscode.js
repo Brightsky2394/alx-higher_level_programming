@@ -4,5 +4,5 @@ const request = require('request');
 const url = args[2];
 request(url,
   (err, res) => {
-    if (!err) { process.stdout.write(`code: ${res.statusCode}`); } else { console.error('Error:', err); }
+    if (!err) { console.log(`code: ${res.statusCode}`); } else { console.error('Error:', err); }
   });
