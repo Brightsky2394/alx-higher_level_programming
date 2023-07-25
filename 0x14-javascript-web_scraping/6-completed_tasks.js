@@ -8,7 +8,8 @@ request(url, (err, res, body) => {
     const resDict = {};
     for (const j of resBody) {
       if (j.completed === true) {
-        if (resDict[j.userId] === undefined) { resDict[j.userId] = 0; } else { resDict[j.userId] += 1; }
+        if (resDict[j.userId] === undefined) { resDict[j.userId] = 0; }
+        resDict[j.userId] += 1;
       }
     }
     console.log(resDict);
