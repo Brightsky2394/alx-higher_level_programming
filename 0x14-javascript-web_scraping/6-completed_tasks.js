@@ -4,7 +4,7 @@ const url = process.argv[2];
 const obj = {};
 
 request(url, (err, res, body) => {
-  if (err) throw err;
+  if (err) console.log(err);
   JSON.parse(body).forEach(todo => {
     const id = todo.userId;
     if (obj[id] === undefined) obj[id] = 0;
