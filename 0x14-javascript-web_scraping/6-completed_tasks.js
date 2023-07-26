@@ -1,15 +1,20 @@
 #!/usr/bin/node
+const argv = process.argv;
+const url = argv[2];
 const request = require('request');
-const url = process.argv[2];
-const obj = {};
-
-request(url, (err, res, body) => {
-  if (err) console.log(err);
-  JSON.parse(body).forEach(todo => {
-    const id = todo.userId;
-    if (obj[id] === undefined) obj[id] = 0;
-    if (todo.completed) obj[id]++;
-    if (obj[id] === 0) delete obj[id];
+request(url,
+  function (err, res, body) {
+    if (err === null) {
+      const rbody = JSON.parse(body);
+      const dict = {};
+      for (const j of rbody) {
+        if (j.completed === true) {
+          if (dict[j.userId] === undefined) { dict[j.userId] = 0; }
+          dict[j.userId] += 1;
+        }
+      }
+      console.log(dict);
+    } else {
+      console.log('error:', err);
+    }
   });
-  console.log(obj);
-});
