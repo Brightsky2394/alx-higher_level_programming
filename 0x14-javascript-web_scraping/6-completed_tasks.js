@@ -1,20 +1,16 @@
 #!/usr/bin/node
-const argv = process.argv;
-const url = argv[2];
+const url = process.argv[2];
 const request = require('request');
 request(url,
-  function (err, res, body) {
-    if (err === null) {
+  (err, res, body) => {
+    if (err) { console.log(err); } else {
+      const completedTasksByUsers = {};
       const rbody = JSON.parse(body);
-      const dict = {};
-      for (const j of rbody) {
-        if (j.completed === true) {
-          if (dict[j.userId] === undefined) { dict[j.userId] = 0; }
-          dict[j.userId] += 1;
-        }
+      for (let i = 0; i < rbody.length; i++) {
+        const userId = rbody[i].userId;
+        const completed = rbody[i].completed;
+        if (completed && !completedTasksByUsers[userId]) { completedTasksByUsers[userId] = 0; } if (completed) { completedTasksByUsers[userId] += 1; }
       }
-      console.log(dict);
-    } else {
-      console.log('error:', err);
+      console.log(completedTasksByUsers);
     }
   });
