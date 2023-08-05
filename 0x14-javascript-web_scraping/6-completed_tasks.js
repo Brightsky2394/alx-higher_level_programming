@@ -1,16 +1,15 @@
 #!/usr/bin/node
-const url = process.argv[2];
+const apiUrl = process.argv[2];
 const request = require('request');
-request(url,
-  (err, res, body) => {
-    if (err) { console.log(err); } else {
-      const completedTasksByUsers = {};
-      const rbody = JSON.parse(body);
-      for (let i = 0; i < rbody.length; i++) {
-        const userId = rbody[i].userId;
-        const completed = rbody[i].completed;
-        if (completed && completedTasksByUsers[userId] === undefined) { completedTasksByUsers[userId] = 0; } if (completed) { completedTasksByUsers[userId]++; }
-      }
-      console.log(completedTasksByUsers);
-    }
-  });
+request(apiUrl, (err, res, body) => {
+  if (err === null) {
+    const completedUserById = {};
+    JSON.parse(body).forEach(i => {
+      const userId = i.userId;
+      const completed = i.completed;
+      if (completed && completedUserById[userId] === undefined) { completedUserById[userId] = 0; }
+      if (completed) { completedUserById[userId]++; }
+    });
+    console.log(completedUserById);
+  } else { throw err; }
+});
